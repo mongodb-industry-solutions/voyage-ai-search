@@ -5,10 +5,12 @@
 
 from flask import Flask, Response, session, request, jsonify, render_template
 from voyageai import Client as VoyageClient
-import os, time, json, textwrap, pymongo
+import os, time, json, textwrap, pymongo, secrets
 
 app = Flask(__name__)
-app.secret_key = 'ist-secret-key-0815'
+app.secret_key = secrets.token_hex(24)
+print("App secret key (tmp): " + app.secret_key)
+
 voyage_client = VoyageClient()
 
 current_coll = 'charts'  # default
