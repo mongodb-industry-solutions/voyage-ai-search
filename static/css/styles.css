@@ -1,0 +1,279 @@
+/*
+ *  Copyright (c) 2024, 2025 MongoDB Inc.
+ *  Author: Benjamin Lorenz <benjamin.lorenz@mongodb.com>
+ */
+
+
+body {
+    background-color: #f8f9fa;
+}
+
+#chat-box {
+    height: 420px;
+    overflow-y: scroll;
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.message {
+    margin-bottom: 15px;
+    display: flex;
+}
+
+.message.user {
+    justify-content: flex-start; /* User messages on the left */
+}
+
+.message.assistant {
+    justify-content: flex-end; /* Assistant messages on the right */
+}
+
+.message .content {
+    padding: 8px 12px;
+    border-radius: 18px;
+    max-width: 75%;
+    word-wrap: break-word;
+    text-align: left;
+}
+
+.message.user .content {
+    background-color: #e9ecef; /* Gray background for user */
+    color: #212529;
+}
+
+.message.assistant .content {
+    background-color: #c5eec5; /* Green background for assistant */
+    color: #212529;
+    max-width: 95%;
+}
+
+div.content > p:first-child {
+    padding-top: 0;
+    margin-top: 0;
+}
+
+div.content > p:last-child {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+input:focus, textarea:focus {
+    outline: 2px solid #c5eec5 !important; /* Light green */
+    box-shadow: 0 0 5px #c5eec5 !important; /* Optional green shadow effect */
+}
+
+button:focus {
+    outline: none !important; /* Light green */
+    box-shadow: 0 0 5px #c5eec5 !important; /* Optional green shadow effect */
+}
+
+ol li, ul li {
+    list-style: square;
+    margin-left: 1.4em;
+    margin-bottom: 1em;
+}
+
+li ol li, li ul li {
+    margin-top: 1em;
+}
+
+strong {
+    color: #222;
+    font-weight: bold;
+}
+
+h3, h4 {
+    color: #00684A;
+    font-weight: normal;
+    padding-top: 0.9em;
+    padding-bottom: 0.5em;
+}
+
+h3 strong, h4 strong {
+    color: #00684A;
+    font-weight: normal;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+h4 {
+    font-size: 1.4rem;
+}
+
+table {
+    font-size: 17px;
+    line-height: 1.45em;
+    margin-bottom: 1em;
+}
+
+thead th {
+    color: #222;
+    font-weight: bold;
+}
+
+tbody td strong {
+    color: #222;
+    font-weight: normal;
+}
+
+td, th {
+    padding-right: 1.15em;
+}
+
+#sidebar {
+    border: 0 solid #dee2e6 !important;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    box-shadow: none !important;
+}
+
+.message .content {
+    padding: 8px 12px !important;
+    margin: 0 !important;
+}
+
+.message.user .content {
+    max-width: 75% !important;
+}
+
+.message.assistant .content {
+    max-width: 75% !important;
+}
+
+ol li, ul li {
+    margin-left: 1em !important;
+}
+
+/* Blasen 100% symmetrisch - HARTE ÜBERSCHREIBUNG */
+.message {
+    padding: 0 !important;
+    margin: 0 0 15px 0 !important;
+}
+
+.message .content {
+    padding: 6px 10px !important;      /* super-eng */
+    margin: 0 !important;
+    max-width: 70% !important;
+    box-sizing: border-box !important; /* Padding zählt zur Breite */
+}
+
+/* Markdown komplett resetten */
+.content ul, .content ol {
+    margin-left: 0.5em !important;     /* minimaler Einrückung */
+    padding-left: 0 !important;
+}
+
+.content li {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+
+/* User und Assistant einheitlich */
+.message.user .content,
+.message.assistant .content {
+    max-width: 70% !important;
+}
+
+/* Blasen optimal symmetrisch - GOLDEN MEAN */
+.message .content {
+    padding: 10px 14px !important;     /* mittel: mehr als 6px, weniger als 15px */
+    margin: 0 !important;
+    max-width: 72% !important;
+    box-sizing: border-box !important;
+}
+
+.content ul, .content ol {
+    margin-left: 0.9em !important;     /* etwas mehr Einrückung */
+    padding-left: 0.3em !important;
+}
+
+.content li {
+    margin-left: 0 !important;
+}
+
+/* Bulletpoints kompakter */
+.content ul li, .content ol li {
+    margin-bottom: 0 !important;   /* statt 1em */
+}
+
+.content ul, .content ol {
+    margin-bottom: 0 !important;   /* kompakter Block */
+}
+
+/* Markdown line-height killen - NO MORE SPACING */
+.content p {
+    margin: 0.1em !important;
+    padding: 0.1em !important;
+    line-height: 1.5 !important;      /* kompakt */
+}
+
+.content ul li, .content ol li {
+    margin: 0.2em 0 !important;       /* minimal */
+    line-height: 1.5 !important;
+}
+
+.content ul, .content ol {
+    margin: 0.3em 0 !important;
+    padding-left: 1.2em !important;
+}
+
+.message .content > *:first-child {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+.btn-group .btn {
+    border-radius: 0;
+    border-width: 1px 0 1px 1px;
+}
+
+.btn-group .btn:first-child {
+    border-top-left-radius: 6px !important;
+    border-bottom-left-radius: 6px !important;
+    border-left-width: 1px;
+}
+
+.btn-group .btn:last-child {
+    border-top-right-radius: 6px !important;
+    border-bottom-right-radius: 6px !important;
+    border-right-width: 1px;
+}
+
+.btn-group-sm .btn {
+    padding: 0.3rem 0.75rem;
+    font-size: 0.85rem;
+}
+
+/* Buttons dunkler + lesbar */
+.btn[data-type] {
+    border: 1px solid #ced4da !important;
+    color: #495057 !important;         /* dunkle Schrift */
+}
+
+.btn[data-type]:hover {
+    background-color: #f8f9fa !important;  /* mittelgrau Hover */
+    border-color: #ced4da !important;
+    color: #212529 !important;             /* noch dunkler */
+}
+
+.btn[data-type].active {
+    background-color: #dee2e6 !important;  /* dunkleres Grau Active */
+    border-color: #adb5bd !important;
+    color: #212529 !important;
+}
+
+.btn[data-type].active {
+    background-color: #e9ecef !important;
+    border-color: #adb5bd !important;      /* Active etwas dunkler */
+    box-shadow: none !important;
+}
+
+.btn[data-type]:hover.active {
+    border-color: #adb5bd !important;      /* Active + Hover = Active-Farbe */
+}
+
