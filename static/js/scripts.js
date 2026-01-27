@@ -170,6 +170,33 @@ function handleChatFormSubmit(e, customMessage = null) {
         });
 };
 
+$(document).on('click', '.result-link', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const index = $(this).data('index');
+
+    // Send request to load this specific result
+    fetch('/load_result', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ index: index })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            updateSidebar();
+        } else {
+            console.error('Failed to load result:', data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error loading result:', error);
+    });
+});
+
 $(document).ready(function() {
     $('#chat-form').on('submit', handleChatFormSubmit);
 

@@ -277,3 +277,20 @@ ol li, ul li {
     border-color: #adb5bd !important;      /* Active + Hover = Active-Farbe */
 }
 
+/* Styling for clickable result links */
+.result-link {
+    color: #00684A;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.result-link:hover {
+    color: #004d36;
+    text-decoration: underline;
+}
+
+.message.assistant .content a.result-link {
+    color: #00684A;
+    font-weight: 500;
+}

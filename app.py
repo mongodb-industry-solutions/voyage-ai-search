@@ -15,6 +15,7 @@ voyage_client = VoyageClient()
 
 current_coll = 'charts'  # default
 last_result = []
+all_results = []  # Store all search results
 
 # Ensure API key exists in environment variables
 if not os.environ.get("VOYAGE_API_KEY"):
@@ -63,6 +64,29 @@ def sidebar_image():
     url = f"{base_path}/{filename}"
     return jsonify({ 'url': url, 'header': header, 'media_type': media_type,
                      'offset': offset, 'text': text })
+
+
+@app.route("/load_result", methods=['POST'])
+def load_result():
+    """Load a specific result by index"""
+    result_index = request.json.get('index', 0)
+    data_type = session.get('data_type', 'charts')
+
+    if result_index < len(all_results):
+        result = all_results[result_index]
+        last_result.clear()
+
+        if data_type == 'podcast':
+            last_result.append(result.get('offset', 0))
+            last_result.append(result.get('text', ''))
+        elif data_type == 'charts':
+            last_result.append(result.get('description', ''))
+        elif data_type == 'print':
+            last_result.append(result.get('image_filename', ''))
+
+        return jsonify({'success': True})
+
+    return jsonify({'success': False, 'error': 'Invalid index'})
 
 
 @app.route('/chat', methods=['POST'])
@@ -152,27 +176,32 @@ def chat():
     try:
         results = list(collection.aggregate(pipeline))
         if results:
+            all_results.clear()
+            all_results.extend(results)
             last_result.clear()
             if data_type == 'podcast':
                 last_result.append(results[0]['offset'])
                 last_result.append(results[0]['text'])
             else:
                 last_result.append(results[0][config['filename']])
-            for result in results:
+
+            for idx, result in enumerate(results):
                 if data_type == 'charts':
                     answer += (
-                        f" - {textwrap.shorten(result['description'], width=58)}"
+                        f" - <a href='#' class='result-link' data-index='{idx}'>"
+                        f"{textwrap.shorten(result['description'], width=58)}</a>"
                         f", **Score**: {result['score']:.4f}\n\n"
                     )
                 elif data_type == 'print':
                     answer += (
-                        f" - **Issue**: {result['issue_date']}"
-                        f", **Page**: {result['page']}"
+                        f" - <a href='#' class='result-link' data-index='{idx}'>"
+                        f"**Issue**: {result['issue_date']}, **Page**: {result['page']}</a>"
                         f", **Score**: {result['score']:.4f}\n\n"
                     )
                 elif data_type == 'podcast':
                     answer += (
-                        f" - **Offset**: {result['offset']}"
+                        f" - <a href='#' class='result-link' data-index='{idx}'>"
+                        f"**Offset**: {result['offset']}</a>"
                         f", **Score**: {result['score']:.4f}\n\n"
                     )
                 else:
