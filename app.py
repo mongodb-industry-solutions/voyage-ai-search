@@ -45,19 +45,19 @@ def sidebar_image():
     offset = 0
     text = ""
     if data_type == 'charts':
-        base_path = "https://ist.media/content/ft/charts"
+        base_path = "https://ypsilon.news/content/ft/charts"
         filename = last_result[0].replace(' ', '_') + '.png'
         header = textwrap.shorten(last_result[0], width=58)
         media_type = 'image'
     elif data_type == 'print':
-        base_path = "https://ist.media/content/ft/print"
+        base_path = "https://ypsilon.news/content/ft/print"
         filename = last_result[0].replace('PrintMedia/', '')
         header = filename
         media_type = 'image'
     else: # podcast
         offset = last_result[0]
         text = last_result[1]
-        base_path = "https://ist.media/content/ft/podcast"
+        base_path = "https://ypsilon.news/content/ft/podcast"
         filename = "tesla.mp3"
         header = 'FT Podcast about Tesla and Elon Musk'
         media_type = 'audio'
