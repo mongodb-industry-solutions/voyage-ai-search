@@ -1,0 +1,10 @@
+# Environment variables (non-sensitive)
+env:
+  NODE_ENV: staging
+  FLASK_ENV: production
+
+# Secrets - reference Kubernetes secrets created via helm ksec
+# Create secrets with: helm ksec set voyage-ai-search-staging VOYAGE_API_KEY="..." MONGODB_IST_MEDIA="..."
+envSecrets:
+  VOYAGE_API_KEY: voyage-ai-search-prod
+  MONGODB_IST_MEDIA: voyage-ai-search-prod
