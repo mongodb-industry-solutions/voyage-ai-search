@@ -33,6 +33,9 @@ coll_podcast = pymongo.MongoClient(_MC)['ft']['audio']
 def home():
     return render_template('index.html')
 
+@app.route('/help')
+def help():
+    return render_template('help.html')
 
 @app.route("/sidebar_text")
 def sidebar_text():

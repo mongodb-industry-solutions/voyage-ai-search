@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2025, 2026 MongoDB Inc.
+    Author: Benjamin Lorenz <benjamin.lorenz@mongodb.com>
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Voyage AI Search Demo – Help</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .help-body {
+            max-width: 720px;
+        }
+
+        .help-body h2 {
+            font-size: 1.3rem;
+            color: #444;
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .help-body p {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .help-body ul {
+            color: #555;
+            line-height: 1.8;
+            padding-left: 1.4rem;
+        }
+        .compact-list li {
+            line-height: 1.4;
+            margin-bottom: 0.15rem;
+        }
+        .back-link {
+            color: #6f9f6f;
+            font-size: 120%;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: #4d7a4d;
+            text-decoration: underline;
+        }
+
+        hr.help-divider {
+            border-top: 1px solid #ddd;
+            margin: 1.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5" style="width: 100%; padding-left: 1rem;">
+
+        <div class="help-body">
+            <h1>Voyage AI Search</h1>
+
+            <a class="back-link" href="/">← Back to Demo</a>
+
+            <hr class="help-divider">
+
+            <p>
+                This demo showcases multimodal semantic search powered by
+                <strong>Voyage AI</strong> with embeddings stored in
+                <strong>MongoDB Atlas</strong>. Instead of matching exact keywords,
+                the search understands the <em>meaning</em> of your query and returns
+                the most relevant results from the corpus.
+            </p>
+
+            <p>
+                The demo uses content that was provided by Financial Times in the scope
+                of multiple Proof of Concepts, conducted in fall 2025. The corpus is
+                relatively small (a few hundred content items) which means that you need
+                to properly plan for your queries such that you indeed
+                get semantically close results. This is not a limitation of Voyage AI
+                capabilities, but just due to the fact that for a lot of queries there
+                simply does not exist anything close in the data set.
+            </p>
+
+            <h2>Content Types</h2>
+            <p>
+                Use the toggle buttons at the top to switch between the three
+                available content types:
+            </p>
+            <ul>
+                <li><strong>Charts</strong> – Financial and data charts with
+                    descriptive metadata inside the images. This shows how Voyage AI
+                    is capable of indexing text that is embedded in images (typical for
+                    financial charts and the like) and makes the text queryable. This
+                    eliminates the requirement to use OCR software and simplifies the
+                    overall architecture. Financial
+                    Times was not able before to have users search for this text, which
+                    was limiting the power of their web/app content search.
+                </li>
+                <li><strong>Print</strong> – Scanned articles from old Print Media. Similar to
+                    Charts, also for scans of old Print Media Voyage AI can do a superb job
+                    of indexing the scan of a printed page (provided as one JPEG per page for the PoC
+                    we conducted) and makes content within searchable. Be advised that only
+                    complete pages can be returned. With Voyage AI alone it is not possible to zoom
+                    into the page and mark the actual article that was leading to the good match.
+                </li>
+                <li><strong>Podcast</strong> – Transcripts from audio episodes. This shows the
+                    power of using the transcript of spoken audio media, breaking it into segments
+                    of 20 seconds each, and vectorizing these segments for semantic search.
+                    This part of the demo is using one podcast episode of Financial Times,
+                    where they speak about Donald Trump, tarrifs, and Elon Musk.
+                </li>
+            </ul>
+
+            <h2>How to search</h2>
+            <p>
+                Type a question or topic into the input field at the bottom and
+                press <strong>Send</strong>. The system will embed your query using
+                Voyage AI and perform a vector similarity search against the
+                selected content type in MongoDB Atlas.
+            </p>
+            <p>
+                Results appear in the chat window above, ranked by semantic relevance.
+                Furthermore, there's a media view in the right-hand panel that auto-loads
+                the content from the best match. You can refine your query at any time —
+                each search is independent.
+            </p>
+
+            <h2>Example queries</h2>
+            <p>
+                Not sure where to start? Click one of the example queries shown
+                below the input field. They are tailored to the currently selected
+                content type and give a good impression of what the model can find.
+            </p>
+
+            <h2>Tips for better results</h2>
+            <ul class="compact-list">
+                <li>Use natural language — full sentences often work better than
+                    single keywords</li>
+                <li>Be specific: <em>"how inflation erodes cash value"</em>
+                    outperforms just <em>"inflation"</em></li>
+            </ul>
+
+            <hr class="help-divider">
+
+            <p style="color: #999; font-size: 0.85rem;">
+                Voyage AI Search Demo &mdash;
+                &copy; 2025, 2026 MongoDB Inc.
+            </p>
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
